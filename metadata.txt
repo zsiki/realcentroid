@@ -27,8 +27,8 @@ email=siki@agt.bme.hu
 tags=point on surface,centroid,polygon,shapefile
 
 homepage=http://www.agt.bme.hu/gis/qgis/realcentroid
-tracker=http://hub.qgis.org/projects/realcentroids
-repository=http://hub.qgis.org/projects/realcentroids
+tracker=https://github.com/zsiki/realcentroid.git
+repository=https://github.com/zsiki/realcentroid.git
 icon=icon.png
 # experimental flag
 experimental=False
