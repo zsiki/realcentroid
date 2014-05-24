@@ -81,6 +81,16 @@ class RealCentroid:
         while fit.nextFeature(inFeat):
             #nElement += 1
             inGeom = inFeat.geometry()
+            if inGeom.isMultipart:
+                # find largest part in case of multipart
+                maxarea = 0
+                tmpGeom = QgsGeometry()
+                for part in inGeom.asGeometryCollection():
+                    area = part.area()
+                    if area > maxarea:
+                        tmpGeom = part
+                        maxare = area
+                inGeom = tmpGeom
             atMap = inFeat.attributes()
             outGeom = inGeom.centroid()
             if not inGeom.contains(outGeom):
