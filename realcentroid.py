@@ -89,7 +89,7 @@ class RealCentroid:
                     area = part.area()
                     if area > maxarea:
                         tmpGeom = part
-                        maxare = area
+                        maxarea = area
                 inGeom = tmpGeom
             atMap = inFeat.attributes()
             outGeom = inGeom.centroid()
