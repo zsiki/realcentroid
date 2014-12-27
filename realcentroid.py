@@ -97,7 +97,7 @@ class RealCentroid:
                 inGeom = tmpGeom
             atMap = inFeat.attributes()
             if QGis.QGIS_VERSION > '2.4':
-			    outGeom = feat.pointOnSurface()
+                outGeom = feat.pointOnSurface()
             else:
                 outGeom = inGeom.centroid()
             if not inGeom.contains(outGeom):
@@ -127,7 +127,10 @@ class RealCentroid:
         # add centroid shape to canvas
         if self.dlg.ui.addBox.checkState() == Qt.Checked:
            if not util.addShape(self.dlg.shapefileName):
-               QMessageBox.warning(self, "RealCentroid", "Error loading shapefile:\n" + self.dlg.shapefileName)
+               QMessageBox.warning(self, "RealCentroid", \
+                QApplication.translate("RealCentroid", \
+                    "Error loading shapefile:\n", None, \
+                    QtGui.QApplication.UnicodeUTF8) + self.dlg.shapefileName)
 
     # run method that performs all the real work
     def run(self):

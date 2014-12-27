@@ -81,9 +81,13 @@ class RealCentroidDialog(QtGui.QDialog):
 
     def ok(self):
         if len(self.ui.layerBox.currentText()) == 0:
-            QtGui.QMessageBox.information(self, "Realcentroid", "No polygon layer selected")
+            QtGui.QMessageBox.information(self, "Realcentroid", \
+                QApplication.translate("RealCentroid", \
+                "No polygon layer selected", None, QApplication.UnicodeUTF8))
             return
         if len(self.ui.pointEdit.text()) == 0:
-            QtGui.QMessageBox.information(self, "Realcentroid", "No point layer given")
+            QtGui.QMessageBox.information(self, "Realcentroid", \
+                QApplication.translate("RealCentroid", \
+                "No point layer given", None, QApplication.UnicodeUTF8))
             return
         self.accept()
