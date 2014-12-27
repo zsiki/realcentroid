@@ -64,13 +64,12 @@ class RealCentroidDialog(QtGui.QDialog):
         """
         self.ui.selectedBox.setEnabled(False)
         self.ui.selectedBox.setCheckState(Qt.Unchecked)
-        if i >= 0:
-            l = util.getMapLayerByName(self.ui.layerBox.currentText())
-            if l is not None:
-                sf = l.selectedFeatures()
-                if sf is not None and len(sf):
-                    self.ui.selectedBox.setEnabled(True)
-                    self.ui.selectedBox.setCheckState(Qt.Checked)
+        l = util.getMapLayerByName(self.ui.layerBox.currentText())
+        if l is not None:
+            sf = l.selectedFeatures()
+            if sf is not None and len(sf):
+                self.ui.selectedBox.setEnabled(True)
+                self.ui.selectedBox.setCheckState(Qt.Checked)
 
     def browse(self):
         self.ui.pointEdit.clear()    # clear output file field

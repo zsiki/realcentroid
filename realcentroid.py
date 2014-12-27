@@ -23,6 +23,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
+from qgis.utils import *
 # Initialize Qt resources from file resources.py
 import resources_rc
 # Import the code for the dialog
@@ -95,7 +96,10 @@ class RealCentroid:
                         maxarea = area
                 inGeom = tmpGeom
             atMap = inFeat.attributes()
-            outGeom = inGeom.centroid()
+            if QGis.QGIS_VERSION > '2.4':
+			    outGeom = feat.pointOnSurface()
+            else:
+                outGeom = inGeom.centroid()
             if not inGeom.contains(outGeom):
                 # weight point outside the polygon
                 # find intersection of horizontal line through the weight pont
