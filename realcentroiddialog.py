@@ -21,6 +21,7 @@
 """
 
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtCore import Qt
 from ui_realcentroid import Ui_RealCentroid
 from qgis.core import *
 from qgis.utils import *
@@ -33,10 +34,12 @@ class RealCentroidDialog(QtGui.QDialog):
         # Set up the user interface from Designer.
         self.ui = Ui_RealCentroid()
         self.ui.setupUi(self)
-        # add action to browse button
-        QtCore.QObject.connect(self.ui.browseButton, QtCore.SIGNAL("clicked()"), self.browse)
-        QtCore.QObject.connect(self.ui.okButton, QtCore.SIGNAL("clicked()"), self.ok)
-        QtCore.QObject.connect(self.ui.cancelButton, QtCore.SIGNAL("clicked()"), self.reject)
+        # add action to buttons
+        self.ui.browseButton.clicked.connect(self.browse)
+        self.ui.okButton.clicked.connect(self.ok)
+        self.ui.cancelButton.clicked.connect(self.reject)
+        # layer changed event
+        self.ui.layerBox.currentIndexChanged.connect(self.sel)
 
     def showEvent(self, event):
         # remove previous entries from layer list
@@ -56,13 +59,26 @@ class RealCentroidDialog(QtGui.QDialog):
                     break
                 i += 1
 
+    def sel(self):
+        """ enable/disable selected features only checkbox
+        """
+        self.ui.selectedBox.setEnabled(False)
+        self.ui.selectedBox.setCheckState(Qt.Unchecked)
+        if i >= 0:
+            l = util.getMapLayerByName(self.ui.layerBox.currentText())
+            if l is not None:
+                sf = l.selectedFeatures()
+                if sf is not None and len(sf):
+                    self.ui.selectedBox.setEnabled(True)
+                    self.ui.selectedBox.setCheckState(Qt.Checked)
+
     def browse(self):
-        self.ui.pointEdit.clear()	# clear output file field
+        self.ui.pointEdit.clear()    # clear output file field
         # open file dialog
         (self.shapefileName, self.encoding) = util.saveDialog(self)
         if self.shapefileName is None or self.encoding is None:
             return
-        self.ui.pointEdit.setText(self.shapefileName)	# fill output file field
+        self.ui.pointEdit.setText(self.shapefileName)  # fill output file field
 
     def ok(self):
         if len(self.ui.layerBox.currentText()) == 0:

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>389</width>
-    <height>198</height>
+    <height>233</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>70</y>
+     <y>100</y>
      <width>201</width>
      <height>21</height>
     </rect>
@@ -59,7 +59,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>90</y>
+     <y>120</y>
      <width>291</width>
      <height>31</height>
     </rect>
@@ -69,7 +69,7 @@
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>90</y>
+     <y>120</y>
      <width>71</width>
      <height>31</height>
     </rect>
@@ -82,7 +82,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>130</y>
+     <y>160</y>
      <width>361</width>
      <height>26</height>
     </rect>
@@ -95,7 +95,7 @@
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>160</y>
+     <y>190</y>
      <width>71</width>
      <height>31</height>
     </rect>
@@ -108,13 +108,26 @@
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>160</y>
+     <y>190</y>
      <width>71</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>Ok</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="selectedBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>361</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Selected features only</string>
    </property>
   </widget>
  </widget>

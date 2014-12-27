@@ -77,8 +77,11 @@ class RealCentroid:
         writer = QgsVectorFileWriter(self.dlg.shapefileName, self.dlg.encoding, vprovider.fields(), QGis.WKBPoint, vprovider.crs())
         inFeat = QgsFeature()
         outFeat = QgsFeature()
-        fit = vprovider.getFeatures()
-        while fit.nextFeature(inFeat):
+        if self.dlg.ui.selectedBox.isChecked():
+            features = vlayer.selectedFeatures()
+        else:
+            features = vlayer.getFeatures()
+        for inFeat in features:
             #nElement += 1
             inGeom = inFeat.geometry()
             if inGeom.isMultipart:
