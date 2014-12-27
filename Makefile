@@ -26,8 +26,8 @@ QGISDIR=.qgis2
 
 # translation
 SOURCES = realcentroid.py ui_realcentroid.py __init__.py realcentroiddialog.py util.py
-#TRANSLATIONS = i18n/realcentroid_en.ts
-TRANSLATIONS = 
+TRANSLATIONS = i18n/realcentroid_en.ts
+#TRANSLATIONS = 
 
 # global
 
