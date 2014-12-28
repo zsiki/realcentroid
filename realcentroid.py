@@ -97,7 +97,7 @@ class RealCentroid:
                 inGeom = tmpGeom
             atMap = inFeat.attributes()
             if QGis.QGIS_VERSION > '2.4':
-                outGeom = feat.pointOnSurface()
+                outGeom = inGeom.pointOnSurface()
             else:
                 outGeom = inGeom.centroid()
             if not inGeom.contains(outGeom):
