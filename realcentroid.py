@@ -85,7 +85,7 @@ class RealCentroid:
         for inFeat in features:
             #nElement += 1
             inGeom = inFeat.geometry()
-            if inGeom.isMultipart:
+            if inGeom.isMultipart():
                 # find largest part in case of multipart
                 maxarea = 0
                 tmpGeom = QgsGeometry()
