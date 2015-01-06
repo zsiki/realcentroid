@@ -21,7 +21,6 @@
 """
 
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
 from ui_realcentroid import Ui_RealCentroid
 from qgis.core import *
 from qgis.utils import *
@@ -63,13 +62,13 @@ class RealCentroidDialog(QtGui.QDialog):
         """ enable/disable selected features only checkbox
         """
         self.ui.selectedBox.setEnabled(False)
-        self.ui.selectedBox.setCheckState(Qt.Unchecked)
+        self.ui.selectedBox.setCheckState(QtCore.Qt.Unchecked)
         l = util.getMapLayerByName(self.ui.layerBox.currentText())
         if l is not None:
             sf = l.selectedFeatures()
             if sf is not None and len(sf):
                 self.ui.selectedBox.setEnabled(True)
-                self.ui.selectedBox.setCheckState(Qt.Checked)
+                self.ui.selectedBox.setCheckState(QtCore.Qt.Checked)
 
     def browse(self):
         self.ui.pointEdit.clear()    # clear output file field

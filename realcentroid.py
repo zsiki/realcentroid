@@ -20,8 +20,8 @@
  ***************************************************************************/
 """
 # Import the PyQt and QGIS libraries
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt4.QtCore import QSettings, QCoreApplication, QTranslator, Qt
+from PyQt4.QtGui import QAction, QIcon, QApplication, QMessageBox
 from qgis.core import *
 from qgis.utils import *
 # Initialize Qt resources from file resources.py
@@ -31,7 +31,6 @@ from realcentroiddialog import RealCentroidDialog
 import os.path
 import util
 from math import sqrt
-#import pdb
 
 class RealCentroid:
 
@@ -130,7 +129,7 @@ class RealCentroid:
                QMessageBox.warning(self, "RealCentroid", \
                 QApplication.translate("RealCentroid", \
                     "Error loading shapefile:\n", None, \
-                    QtGui.QApplication.UnicodeUTF8) + self.dlg.shapefileName)
+                    QApplication.UnicodeUTF8) + self.dlg.shapefileName)
 
     # run method that performs all the real work
     def run(self):
