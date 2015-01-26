@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_realcentroid.ui'
 #
-# Created: Tue Jan  6 14:51:11 2015
+# Created: Mon Jan 26 23:15:11 2015
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
