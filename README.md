@@ -1,6 +1,6 @@
 Real Centroids V0.6
 ===================
-![icon](https://github.com/zsiki/realcentroid/icon.png)
+![icon](icon.png)
 
 RealCentroids plugin creates a point shape file with internal points of a polygon shape, similar to PostGIS (GEOS) ST\_PointOnSurface. The point will be inside the polygon in all cases. Not only the points are created but the attributes are also copied from the polygons to the internal points . A single point is generated for multipart geometry.
 
