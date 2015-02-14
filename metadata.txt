@@ -12,7 +12,7 @@
 name=realcentroid
 qgisMinimumVersion=2.0
 description=This plugin creates a point shape file with internal points of a polygon shape, similiar to the ST_PointOnSurface function of PostGIS. The point will be inside the polygon all cases. Not only the geometries are created but the attributes are also copied from the polygon to the internal point.
-version=0.5
+version=0.6
 author=Zoltan Siki
 email=siki@agt.bme.hu
 
@@ -35,4 +35,3 @@ experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version
 deprecated=False
-
