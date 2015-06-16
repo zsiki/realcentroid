@@ -84,6 +84,8 @@ class RealCentroid:
         for inFeat in features:
             #nElement += 1
             inGeom = inFeat.geometry()
+            if inGeom is None or inGeom.isGeosEmpty() or not inGeom.isGeosValid():
+                continue
             if inGeom.isMultipart():
                 # find largest part in case of multipart
                 maxarea = 0
@@ -97,7 +99,7 @@ class RealCentroid:
             atMap = inFeat.attributes()
             if QGis.QGIS_VERSION > '2.4':
                 outGeom = inGeom.pointOnSurface()
-                if outGeom in None:
+                if outGeom is None:
                     # pointOnSurface failed
                     outGeom = inGeom.centroid()
             else:
@@ -108,7 +110,10 @@ class RealCentroid:
                 rect = inGeom.boundingBox()
                 horiz = QgsGeometry.fromPolyline([QgsPoint(rect.xMinimum(), outGeom.asPoint()[1]), QgsPoint(rect.xMaximum(), outGeom.asPoint()[1])])
                 line = horiz.intersection(inGeom)
-                if line.isMultipart():
+                if line is None:
+                    # skip invalid geometry
+                    continue
+                elif line.isMultipart():
                     # find longest intersection
                     mline = line.asMultiPolyline()
                     l = 0
