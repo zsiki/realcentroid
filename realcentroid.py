@@ -81,10 +81,15 @@ class RealCentroid:
             features = vlayer.selectedFeatures()
         else:
             features = vlayer.getFeatures()
+        nElement = 0
+        nError = 0
         for inFeat in features:
-            #nElement += 1
+            nElement += 1
             inGeom = inFeat.geometry()
             if inGeom is None or inGeom.isGeosEmpty() or not inGeom.isGeosValid():
+                
+                QgsMessageLog.logMessage("Feature %d skipped (empty or invalid geometry)" % nElement, 'realcentroid')
+                nError += 1
                 continue
             if inGeom.isMultipart():
                 # find largest part in case of multipart
@@ -112,6 +117,8 @@ class RealCentroid:
                 line = horiz.intersection(inGeom)
                 if line is None:
                     # skip invalid geometry
+                    QgsMessageLog.logMessage("Feature %d skipped (empty or invalid geometry)" % nElement, 'realcentroid')
+                    nError += 1
                     continue
                 elif line.isMultipart():
                     # find longest intersection
@@ -133,11 +140,15 @@ class RealCentroid:
         del writer
         # add centroid shape to canvas
         if self.dlg.ui.addBox.checkState() == Qt.Checked:
-           if not util.addShape(self.dlg.shapefileName):
-               QMessageBox.warning(self, "RealCentroid", \
-                QApplication.translate("RealCentroid", \
+            if not util.addShape(self.dlg.shapefileName):
+                QMessageBox.warning(None, "RealCentroid", \
+                    QApplication.translate("RealCentroid", \
                     "Error loading shapefile:\n", None, \
                     QApplication.UnicodeUTF8) + self.dlg.shapefileName)
+        if nError > 0:
+            QMessageBox.warning(None, "RealCentroid", \
+                QApplication.translate("RealCentroid", \
+                "Invalid or empty geometries found, see log messages"))
 
     # run method that performs all the real work
     def run(self):
