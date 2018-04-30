@@ -22,8 +22,7 @@
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import QSettings, QCoreApplication, QTranslator, Qt
 from PyQt4.QtGui import QAction, QIcon, QApplication, QMessageBox
-from qgis.core import *
-from qgis.utils import *
+from qgis.core import QGis, QgsVectorFileWriter, QgsFeature
 # Initialize Qt resources from file resources.py
 import resources_rc
 # Import the code for the dialog
@@ -102,12 +101,9 @@ class RealCentroid:
                         maxarea = area
                 inGeom = tmpGeom
             atMap = inFeat.attributes()
-            if QGis.QGIS_VERSION > '2.4':
-                outGeom = inGeom.pointOnSurface()
-                if outGeom is None:
-                    # pointOnSurface failed
-                    outGeom = inGeom.centroid()
-            else:
+            outGeom = inGeom.pointOnSurface()
+            if outGeom is None:
+                # pointOnSurface failed
                 outGeom = inGeom.centroid()
             if not inGeom.contains(outGeom):
                 # weight point outside the polygon

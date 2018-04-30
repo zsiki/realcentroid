@@ -22,8 +22,8 @@
 
 from PyQt4 import QtCore, QtGui
 from ui_realcentroid import Ui_RealCentroid
-from qgis.core import *
-from qgis.utils import *
+from qgis.core import QGis
+from qgis.utils import iface
 import util
 
 # create the dialog for real centroids

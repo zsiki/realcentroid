@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt4.QtCore import QFileInfo, QSettings
+from PyQt4.QtGui import QFileDialog, QDialog
 
-from qgis.core import *
+from qgis.core import QgsMapLayerRegistry, QgsMapLayer, QgsVectorLayer
 from qgis.gui import QgsEncodingFileDialog
 import locale
 
