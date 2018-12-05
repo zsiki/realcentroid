@@ -20,8 +20,9 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import absolute_import
 
 def classFactory(iface):
     # load RealCentroid class from file RealCentroid
-    from realcentroid import RealCentroid
+    from .realcentroid import RealCentroid
     return RealCentroid(iface)

@@ -1,37 +1,39 @@
-# This file contains metadata for your plugin. Beginning
-# with version 1.8 this is the preferred way to supply information about a
-# plugin. The current method of embedding metadata in __init__.py will
-# be supported until version 2.0
+# This file contains metadata for your plugin. Since 
+# version 2.0 of QGIS this is the proper way to supply 
+# information about a plugin. The old method of 
+# embedding metadata in __init__.py will 
+# is no longer supported since version 2.0.
 
-# This file should be included when you package your plugin.
-
-# Mandatory items:
-
+# This file should be included when you package your plugin.# Mandatory items:
 
 [general]
 name=realcentroid
-qgisMinimumVersion=2.0
-description=This plugin creates a point shape file with internal points of a polygon shape, similiar to the ST_PointOnSurface function of PostGIS. The point will be inside the polygon all cases. Not only the geometries are created but the attributes are also copied from the polygon to the internal point.
-version=0.6
-author=Zoltan Siki
-email=siki@agt.bme.hu
+qgisMinimumVersion=3.0
+description=Create internal point for a polygon layer
+version=0.8
+author=Zotan Siki
+email=siki1958@gmail.com
 
-# end of mandatory metadata
+about=Creates an internal ponts of a polygon layer into a new point layer. Attriburtes are copied too.
 
-# Optional items:
+tracker=https://github.com/zsiki/realcentroid/issues
+repository=https://github.com/zsiki/realcentroid
+# End of mandatory metadata
 
-# Uncomment the following line and add your changelog entries:
+# Recommended items:
+
+# Uncomment the following line and add your changelog:
 # changelog=
 
-# tags are comma separated with spaces allowed
-tags=point on surface,centroid,polygon,shapefile
+# Tags are comma separated with spaces allowed
+tags=python
 
-homepage=http://www.agt.bme.hu/gis/qgis/realcentroid
-tracker=https://github.com/zsiki/realcentroid.git
-repository=https://github.com/zsiki/realcentroid.git
+homepage=https://github.com/zsiki/realcentroid/issues
+category=Vector
 icon=icon.png
 # experimental flag
 experimental=False
 
-# deprecated flag (applies to the whole plugin, not just a single version
+# deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
+
