@@ -21,17 +21,17 @@
  *                                                                         *
  ***************************************************************************/
 """
+import os.path
 from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
+from qgis.core import QgsVectorFileWriter, QgsWkbTypes, QgsFeature, \
+    QgsMessageLog
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
 from .realcentroid_dialog import RealCentroidDialog
-import os.path
-from qgis.core import QgsVectorFileWriter, QgsWkbTypes, QgsFeature, \
-    QgsMessageLog
 
 class RealCentroid:
     """QGIS Plugin Implementation."""
@@ -51,7 +51,7 @@ class RealCentroid:
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(self.plugin_dir, 'i18n',
-            'RealCentroid_{}.qm'.format(locale))
+                                   'RealCentroid_{}.qm'.format(locale))
 
         if os.path.exists(locale_path):
             self.translator = QTranslator()
@@ -67,7 +67,6 @@ class RealCentroid:
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&realcentroid')
-        # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'RealCentroid')
         self.toolbar.setObjectName(u'RealCentroid')
 
@@ -88,8 +87,8 @@ class RealCentroid:
 
 
     def add_action(self, icon_path, text, callback, enabled_flag=True,
-        add_to_menu=True, add_to_toolbar=True, status_tip=None,
-        whats_this=None, parent=None):
+                   add_to_menu=True, add_to_toolbar=True, status_tip=None,
+                   whats_this=None, parent=None):
         """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
@@ -156,7 +155,7 @@ class RealCentroid:
 
         icon_path = ':/plugins/realcentroid/icon.png'
         self.add_action(icon_path, text=self.tr(u'RealCentroid'),
-            callback=self.run, parent=self.iface.mainWindow())
+                        callback=self.run, parent=self.iface.mainWindow())
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -177,7 +176,6 @@ class RealCentroid:
             vprovider.crs())
         outFeat = QgsFeature()
         if self.dlg.selectedBox.isChecked():
-            TODO
             features = vlayer.selectedFeatures()
         else:
             features = vlayer.getFeatures()
@@ -187,7 +185,7 @@ class RealCentroid:
             nElement += 1
             inGeom = inFeat.geometry()
             if inGeom is None or not inFeat.hasGeometry() or \
-                not inGeom.isGeosValid():
+               not inGeom.isGeosValid():
                 QgsMessageLog.logMessage("Feature %d skipped (empty or invalid geometry)" % nElement, 'realcentroid')
                 nError += 1
                 continue
@@ -209,7 +207,8 @@ class RealCentroid:
         del writer
         # add centroid shape to canvas
         if self.dlg.addBox.checkState() == Qt.Checked:
-            if not util.addShape(self.dlg.shapefileName):
+            # TODO
+            if not self.dlg.pointEdit.text():
                 QMessageBox.warning(None, "RealCentroid", \
                     QApplication.translate("RealCentroid", \
                     "Error loading shapefile:\n", None, \
@@ -227,6 +226,5 @@ class RealCentroid:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
+            # generate points on surface
             self.generate()

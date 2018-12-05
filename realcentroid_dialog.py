@@ -36,6 +36,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 
 class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
+    """ dialog class for realcentroid QGIS3 plugin """
     def __init__(self, parent=None):
         """Constructor."""
         super(RealCentroidDialog, self).__init__(parent)
@@ -62,7 +63,7 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
             sf = l.selectedFeatures()
         except:
             sf = None
-        if sf is not None and len(sf):
+        if sf: # is not None and len(sf):
             self.selectedBox.setEnabled(True)
             self.selectedBox.setCheckState(QtCore.Qt.Checked)
         else:
@@ -74,14 +75,14 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
         settings = QgsSettings()
         dirName = settings.value("/UI/lastShapefileDir")
         encode = settings.value("/UI/encoding")
-        fileDialog = QgsEncodingFileDialog(self, "Output shape file", dirName, 
-            "GeoPackage (*.gpkg)", encode)
+        fileDialog = QgsEncodingFileDialog(self, "Output shape file", dirName,
+                                           "GeoPackage (*.gpkg)", encode)
         fileDialog.setDefaultSuffix("shp")
         fileDialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
         fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptSave)
         #fileDialog.setConfirmOverwrite(True)
         if not fileDialog.exec_() == QtWidgets.QDialog.Accepted:
-                return
+            return
         files = fileDialog.selectedFiles()
         self.pointEdit.setText(files[0])
         self.encoding = fileDialog.encoding()
@@ -92,11 +93,10 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
             QtGui.QMessageBox.information(self, "Realcentroid", \
                 QtGui.QApplication.translate("RealCentroid", \
                 "No polygon layer selected", None))
-            return False
+            return
         if len(self.pointEdit.text()) == 0:
             QtGui.QMessageBox.information(self, "Realcentroid", \
                 QtGui.QApplication.translate("RealCentroid", \
                 "No point layer given", None))
-            return False
+            return
         self.accept()
-
