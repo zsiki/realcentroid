@@ -10,7 +10,7 @@
 name=realcentroid
 qgisMinimumVersion=3.0
 description=Create internal point for a polygon layer
-version=0.8
+version=1.0
 author=Zotan Siki
 email=siki1958@gmail.com
 
