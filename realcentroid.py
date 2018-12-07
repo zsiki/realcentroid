@@ -27,7 +27,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
 from qgis.core import QgsVectorFileWriter, QgsWkbTypes, QgsFeature, \
-    QgsMessageLog
+    QgsMessageLog, QgsVectorLayer, QgsProject
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
@@ -173,7 +173,7 @@ class RealCentroid:
         vprovider = vlayer.dataProvider()
         writer = QgsVectorFileWriter(self.dlg.pointEdit.text(), \
             self.dlg.encoding, vprovider.fields(), QgsWkbTypes.Point, \
-            vprovider.crs())
+            vprovider.crs(), "ESRI Shapefile")
         outFeat = QgsFeature()
         if self.dlg.selectedBox.isChecked():
             features = vlayer.selectedFeatures()
@@ -205,18 +205,19 @@ class RealCentroid:
             outFeat.setGeometry(outGeom)
             writer.addFeature(outFeat)
         del writer
-        # add centroid shape to canvas
-        if self.dlg.addBox.checkState() == Qt.Checked:
-            # TODO
-            if not self.dlg.pointEdit.text():
-                QMessageBox.warning(None, "RealCentroid", \
-                    QApplication.translate("RealCentroid", \
-                    "Error loading shapefile:\n", None, \
-                    QApplication.UnicodeUTF8) + self.dlg.shapefileName)
         if nError > 0:
             QMessageBox.warning(None, "RealCentroid", \
-                QApplication.translate("RealCentroid", \
-                "Invalid or empty geometries found, see log messages"))
+                tr("Invalid or empty geometries found, see log messages"))
+        # add centroid shape to canvas
+        if self.dlg.addBox.checkState() == Qt.Checked:
+            p, name = os.path.split(self.dlg.pointEdit.text())
+            w = QgsVectorLayer(self.dlg.pointEdit.text(), name, 'ogr')
+            if w.isValid():
+                QgsProject.instance().addMapLayer(w)
+            else:
+                QMessageBox.warning(None, "RealCentroid", \
+                    tr("Error loading shapefile\n") +
+                    self.dlg.pointEdit.text())
 
     def run(self):
         """Run method that performs all the real work"""

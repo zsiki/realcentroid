@@ -44,8 +44,8 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
         self.encoding = None
         self.layerBox.currentIndexChanged.connect(self.sel)
         self.browseButton.clicked.connect(self.browse)
-        self.button_box.button(QtGui.QDialogButtonBox.Cancel).clicked.connect(self.reject)
-        self.button_box.button(QtGui.QDialogButtonBox.Ok).clicked.connect(self.ok)
+        self.cancelBtn.clicked.connect(self.reject)
+        self.okBtn.clicked.connect(self.ok)
 
     def showEvent(self, event):
         """ initialize dialog widgets """
@@ -76,7 +76,7 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
         dirName = settings.value("/UI/lastShapefileDir")
         encode = settings.value("/UI/encoding")
         fileDialog = QgsEncodingFileDialog(self, "Output shape file", dirName,
-                                           "GeoPackage (*.gpkg)", encode)
+                                           "Shape file (*.shp)", encode)
         fileDialog.setDefaultSuffix("shp")
         fileDialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
         fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptSave)
@@ -90,12 +90,12 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
     def ok(self):
         """ check widgets """
         if len(self.layerBox.currentText()) == 0:
-            QtGui.QMessageBox.information(self, "Realcentroid", \
+            QtGui.QMessageBox.warning(self, "Realcentroid", \
                 QtGui.QApplication.translate("RealCentroid", \
                 "No polygon layer selected", None))
             return
         if len(self.pointEdit.text()) == 0:
-            QtGui.QMessageBox.information(self, "Realcentroid", \
+            QtGui.QMessageBox.warning(self, "Realcentroid", \
                 QtGui.QApplication.translate("RealCentroid", \
                 "No point layer given", None))
             return
