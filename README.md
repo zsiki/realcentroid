@@ -1,20 +1,26 @@
-Real Centroids V0.6
+Real Centroids V1.0
 ===================
 ![icon](icon.png)
 
-RealCentroids plugin creates a point shape file with internal points of a polygon shape, similar to PostGIS (GEOS) ST\_PointOnSurface. The point will be inside the polygon in all cases. Not only the points are created but the attributes are also copied from the polygons to the internal points . A single point is generated for multipart geometry.
+RealCentroids plugin creates a point shape file with internal points of a
+polygon shape, similar to PostGIS (GEOS) ST\_PointOnSurface. The point will be
+inside the polygon in all cases. Not only the points are created but the
+attributes are also copied from the polygons to the internal points.
+A single point is generated for multipart geometry. The internal pont will be
+in the part with the largest area.
 
 New features in this version
 ----------------------------
 
-*   Optionally generate centroids for selected features
-*   Use pointOnSurface function for QGIS 2.4 and above
-*   Processing script created from the plugin
+*   upgrade to QGIS 3.x
+*	moved to vector menu
 
 Installation
 ------------
 
-Use the plugin manager or unzip the downloaded realcentroids.zip from the QGIS plugin repository (http://plugins.qgis.org/plugins/realcentroid) into your plugins directory, e.g. ~/.qgis2/python/plugins/.
+Use the plugin manager or unzip the downloaded realcentroids.zip from the QGIS
+plugin repository (http://plugins.qgis.org/plugins/realcentroid) into yours
+plugins directory.
 
 You can download the plugin from GitHub (https://github.com/zsiki/realcentroid), too.
 
