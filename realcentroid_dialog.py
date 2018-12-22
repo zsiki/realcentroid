@@ -90,12 +90,12 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
     def ok(self):
         """ check widgets """
         if len(self.layerBox.currentText()) == 0:
-            QtGui.QMessageBox.warning(self, "Realcentroid", \
+            QtWidgets.QMessageBox.warning(self, "Realcentroid", \
                 QtGui.QApplication.translate("RealCentroid", \
                 "No polygon layer selected", None))
             return
         if len(self.pointEdit.text()) == 0:
-            QtGui.QMessageBox.warning(self, "Realcentroid", \
+            QtWidgets.QMessageBox.warning(self, "Realcentroid", \
                 QtGui.QApplication.translate("RealCentroid", \
                 "No point layer given", None))
             return

@@ -24,7 +24,7 @@
 import os.path
 from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction
+from PyQt5.QtWidgets import QAction, QMessageBox
 
 from qgis.core import QgsVectorFileWriter, QgsWkbTypes, QgsFeature, \
     QgsMessageLog, QgsVectorLayer, QgsProject
