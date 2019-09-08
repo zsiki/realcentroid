@@ -207,7 +207,7 @@ class RealCentroid:
         del writer
         if nError > 0:
             QMessageBox.warning(None, "RealCentroid", \
-                tr("Invalid or empty geometries found, see log messages"))
+                self.tr("Invalid or empty geometries found, see log messages"))
         # add centroid shape to canvas
         if self.dlg.addBox.checkState() == Qt.Checked:
             p, name = os.path.split(self.dlg.pointEdit.text())
@@ -216,7 +216,7 @@ class RealCentroid:
                 QgsProject.instance().addMapLayer(w)
             else:
                 QMessageBox.warning(None, "RealCentroid", \
-                    tr("Error loading shapefile\n") +
+                    self.tr("Error loading shapefile\n") +
                     self.dlg.pointEdit.text())
 
     def run(self):
