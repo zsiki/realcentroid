@@ -26,7 +26,7 @@ import os
 
 from PyQt5 import uic
 from PyQt5 import QtWidgets
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore
 
 from qgis.core import QgsMapLayerProxyModel, QgsSettings
 from qgis.gui import QgsEncodingFileDialog
@@ -91,12 +91,12 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
         """ check widgets """
         if len(self.layerBox.currentText()) == 0:
             QtWidgets.QMessageBox.warning(self, "Realcentroid", \
-                QtGui.QApplication.translate("RealCentroid", \
+                QtWidgets.QApplication.translate("RealCentroid", \
                 "No polygon layer selected", None))
             return
         if len(self.pointEdit.text()) == 0:
             QtWidgets.QMessageBox.warning(self, "Realcentroid", \
-                QtGui.QApplication.translate("RealCentroid", \
+                QtWidgets.QApplication.translate("RealCentroid", \
                 "No point layer given", None))
             return
         self.accept()
