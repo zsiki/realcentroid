@@ -14,7 +14,7 @@ version=1.0.3
 author=Zoltan Siki
 email=siki1958@gmail.com
 
-about=Creates an internal ponts of a polygon layer into a new point layer. Attriburtes are copied too.
+about=Creates a point layer derived from the internal point(s) of a polygon layer. Attributes are copied, too.
 
 tracker=https://github.com/zsiki/realcentroid/issues
 repository=https://github.com/zsiki/realcentroid
