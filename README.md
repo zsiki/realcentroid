@@ -74,5 +74,5 @@ For multipart polygons the algorithm is used for the largest part.
 
 In QGIS 2.4 and after the pointOnSurface (GEOS) function is used.
 
-Thanks to Seal Phone, Jukka Rahkonen, ozak and pxp44 (github) giving advices,
-bug reports to improve the plugin.
+Thanks to Seal Phone, Jukka Rahkonen, ozak, pxp44, lokal-profi (github) giving advices,
+bug reports, pull requests to improve the plugin.
