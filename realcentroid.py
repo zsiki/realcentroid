@@ -22,9 +22,9 @@
  ***************************************************************************/
 """
 import os.path
-from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction, QMessageBox
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction, QMessageBox
 
 from qgis.core import QgsVectorFileWriter, QgsWkbTypes, QgsFeature, \
     QgsMessageLog, QgsVectorLayer, QgsProject
@@ -209,7 +209,7 @@ class RealCentroid:
             QMessageBox.warning(None, "RealCentroid", \
                 self.tr("Invalid or empty geometries found, see log messages"))
         # add centroid shape to canvas
-        if self.dlg.addBox.checkState() == Qt.Checked:
+        if self.dlg.addBox.checkState() == Qt.CheckState.Checked:
             p, name = os.path.split(self.dlg.pointEdit.text())
             w = QgsVectorLayer(self.dlg.pointEdit.text(), name, 'ogr')
             if w.isValid():
@@ -224,7 +224,7 @@ class RealCentroid:
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
-        result = self.dlg.exec_()
+        result = self.dlg.exec()
         # See if OK was pressed
         if result:
             # generate points on surface
