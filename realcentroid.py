@@ -33,6 +33,7 @@ from .resources import *
 # Import the code for the dialog
 from .realcentroid_dialog import RealCentroidDialog
 
+
 class RealCentroid:
     """QGIS Plugin Implementation."""
 
@@ -51,7 +52,7 @@ class RealCentroid:
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(self.plugin_dir, 'i18n',
-                                   'RealCentroid_{}.qm'.format(locale))
+                                   f'RealCentroid_{locale}.qm')
 
         if os.path.exists(locale_path):
             self.translator = QTranslator()
@@ -66,9 +67,9 @@ class RealCentroid:
 
         # Declare instance attributes
         self.actions = []
-        self.menu = self.tr(u'&realcentroid')
-        self.toolbar = self.iface.addToolBar(u'RealCentroid')
-        self.toolbar.setObjectName(u'RealCentroid')
+        self.menu = self.tr('&realcentroid')
+        self.toolbar = self.iface.addToolBar('RealCentroid')
+        self.toolbar.setObjectName('RealCentroid')
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -84,7 +85,6 @@ class RealCentroid:
         """
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('RealCentroid', message)
-
 
     def add_action(self, icon_path, text, callback, enabled_flag=True,
                    add_to_menu=True, add_to_toolbar=True, status_tip=None,
@@ -154,14 +154,14 @@ class RealCentroid:
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
         icon_path = ':/plugins/realcentroid/icon.png'
-        self.add_action(icon_path, text=self.tr(u'RealCentroid'),
+        self.add_action(icon_path, text=self.tr('RealCentroid'),
                         callback=self.run, parent=self.iface.mainWindow())
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
             self.iface.removePluginVectorMenu(
-                self.tr(u'&realcentroid'),
+                self.tr('&realcentroid'),
                 action)
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
@@ -171,9 +171,10 @@ class RealCentroid:
         """ generate points on surface """
         vlayer = self.dlg.layerBox.currentLayer()
         vprovider = vlayer.dataProvider()
-        writer = QgsVectorFileWriter(self.dlg.pointEdit.text(), \
-            self.dlg.encoding, vprovider.fields(), QgsWkbTypes.Point, \
-            vprovider.crs(), "ESRI Shapefile")
+        writer = QgsVectorFileWriter(self.dlg.pointEdit.text(),
+                                     self.dlg.encoding, vprovider.fields(),
+                                     QgsWkbTypes.Point, vprovider.crs(),
+                                     "ESRI Shapefile")
         outFeat = QgsFeature()
         if self.dlg.selectedBox.isChecked():
             features = vlayer.selectedFeatures()
@@ -186,13 +187,13 @@ class RealCentroid:
             inGeom = inFeat.geometry()
             if inGeom is None or not inFeat.hasGeometry() or \
                not inGeom.isGeosValid():
-                QgsMessageLog.logMessage("Feature %d skipped (empty or invalid geometry)" % nElement, 'realcentroid')
+                QgsMessageLog.logMessage(f"Feature {nElement} skipped (empty or invalid geometry)", 'realcentroid')
                 nError += 1
                 continue
             if inGeom.isMultipart():
                 # find largest part in case of multipart
                 maxarea = 0
-                #tmpGeom = QgsGeometry()
+                tmpGeom = None
                 for part in inGeom.asGeometryCollection():
                     area = part.area()
                     if area > maxarea:
@@ -206,18 +207,17 @@ class RealCentroid:
             writer.addFeature(outFeat)
         del writer
         if nError > 0:
-            QMessageBox.warning(None, "RealCentroid", \
-                self.tr("Invalid or empty geometries found, see log messages"))
+            QMessageBox.warning(None, "RealCentroid",
+                                self.tr("Invalid or empty geometries found, see log messages"))
         # add centroid shape to canvas
         if self.dlg.addBox.checkState() == Qt.CheckState.Checked:
-            p, name = os.path.split(self.dlg.pointEdit.text())
+            _, name = os.path.split(self.dlg.pointEdit.text())
             w = QgsVectorLayer(self.dlg.pointEdit.text(), name, 'ogr')
             if w.isValid():
                 QgsProject.instance().addMapLayer(w)
             else:
-                QMessageBox.warning(None, "RealCentroid", \
-                    self.tr("Error loading shapefile\n") +
-                    self.dlg.pointEdit.text())
+                QMessageBox.warning(None, "RealCentroid",
+                                    self.tr("Error loading shapefile\n") + self.dlg.pointEdit.text())
 
     def run(self):
         """Run method that performs all the real work"""

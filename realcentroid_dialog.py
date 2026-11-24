@@ -58,12 +58,12 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def sel(self):
         """ check/uncheck selectBox if selected layer changed """
-        l = self.layerBox.currentLayer()
+        lay = self.layerBox.currentLayer()
         try:
-            sf = l.selectedFeatures()
+            sf = lay.selectedFeatures()
         except:
             sf = None
-        if sf: # is not None and len(sf):
+        if sf:
             self.selectedBox.setEnabled(True)
             self.selectedBox.setCheckState(QtCore.Qt.CheckState.Checked)
         else:
@@ -80,7 +80,7 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
         fileDialog.setDefaultSuffix("shp")
         fileDialog.setFileMode(QtWidgets.QFileDialog.FileMode.AnyFile)
         fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptMode.AcceptSave)
-        #fileDialog.setConfirmOverwrite(True)
+        # fileDialog.setConfirmOverwrite(True)
         if not fileDialog.exec() == QtWidgets.QDialog.DialogCode.Accepted:
             return
         files = fileDialog.selectedFiles()
@@ -90,9 +90,8 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
     def ok(self):
         """ check widgets """
         if len(self.layerBox.currentText()) == 0:
-            QtWidgets.QMessageBox.warning(self, "Realcentroid", \
-                QtWidgets.QApplication.translate("RealCentroid", \
-                "No polygon layer selected", None))
+            QtWidgets.QMessageBox.warning(self, "Realcentroid",
+                                          QtWidgets.QApplication.translate("RealCentroid", "No polygon layer selected", None))
             return
         if len(self.pointEdit.text()) == 0:
             QtWidgets.QMessageBox.warning(self, "Realcentroid", \
