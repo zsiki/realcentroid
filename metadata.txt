@@ -10,8 +10,8 @@
 name=realcentroid
 qgisMinimumVersion=3.0
 qgisMaximumVersion=4.99
-description=Create internal point for a polygon layer
-version=1.0.3
+description=Create internal points for a polygon layer
+version=1.0.4
 author=Zoltan Siki
 email=siki1958@gmail.com
 
@@ -24,7 +24,7 @@ repository=https://github.com/zsiki/realcentroid
 # Recommended items:
 
 # Uncomment the following line and add your changelog:
-# changelog=
+changelog=upgrade to QGIS 4 and to security scan info items
 
 # Tags are comma separated with spaces allowed
 tags=python
@@ -37,4 +37,3 @@ experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
-

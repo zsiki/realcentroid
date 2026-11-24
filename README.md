@@ -1,4 +1,4 @@
-Real Centroids V1.0
+Real Centroids V1.0.4
 ===================
 ![icon](icon.png)
 
@@ -12,8 +12,8 @@ in the part with the largest area.
 New features in this version
 ----------------------------
 
-*   upgrade to QGIS 3.x
-*	moved to vector menu
+*   upgrade to QGIS 4.x thanks to @AmanSreejesh
+*   code update to security scan info items
 
 Installation
 ------------
