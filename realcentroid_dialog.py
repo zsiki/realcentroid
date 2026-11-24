@@ -24,9 +24,9 @@
 
 import os
 
-from PyQt5 import uic
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore
+from qgis.PyQt import uic
+from qgis.PyQt import QtWidgets
+from qgis.PyQt import QtCore
 
 from qgis.core import QgsMapLayerProxyModel, QgsSettings
 from qgis.gui import QgsEncodingFileDialog
@@ -65,10 +65,10 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
             sf = None
         if sf: # is not None and len(sf):
             self.selectedBox.setEnabled(True)
-            self.selectedBox.setCheckState(QtCore.Qt.Checked)
+            self.selectedBox.setCheckState(QtCore.Qt.CheckState.Checked)
         else:
             self.selectedBox.setEnabled(False)
-            self.selectedBox.setCheckState(QtCore.Qt.Unchecked)
+            self.selectedBox.setCheckState(QtCore.Qt.CheckState.Unchecked)
 
     def browse(self):
         """ open save layer dialog """
@@ -78,10 +78,10 @@ class RealCentroidDialog(QtWidgets.QDialog, FORM_CLASS):
         fileDialog = QgsEncodingFileDialog(self, "Output shape file", dirName,
                                            "Shape file (*.shp)", encode)
         fileDialog.setDefaultSuffix("shp")
-        fileDialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
-        fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptSave)
+        fileDialog.setFileMode(QtWidgets.QFileDialog.FileMode.AnyFile)
+        fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptMode.AcceptSave)
         #fileDialog.setConfirmOverwrite(True)
-        if not fileDialog.exec_() == QtWidgets.QDialog.Accepted:
+        if not fileDialog.exec() == QtWidgets.QDialog.DialogCode.Accepted:
             return
         files = fileDialog.selectedFiles()
         self.pointEdit.setText(files[0])
